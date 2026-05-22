@@ -1,0 +1,49 @@
+name: Get_message
+
+on:
+  repository_dispatch:
+    types: [run-teams-bot]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # === 1. THÊM BƯỚC NÀY ĐỂ TỰ ĐỘNG CÀI CHROME TRÊN SERVER ===
+      - name: Install Google Chrome and Driver
+        run: |
+          sudo apt-get update
+          # Cài đặt phiên bản Chrome mới nhất
+          sudo apt-get install -y google-chrome-stable
+          # Cài thêm thư viện để Chrome Headless chạy mượt trên Linux
+          sudo apt-get install -y libnss3 libnspr4 libgbm1 libasound2
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # === 2. CẤU HÌNH TỰ ĐỘNG TẠO FILE COOKIES VÀ CHẠY FILE V2 ===
+      - name: Run the main script
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          TEAMS_COOKIES_JSON: ${{ secrets.TEAMS_COOKIES }}
+        run: |
+          echo "$TEAMS_COOKIES_JSON" > teams_cookies.json
+          python get_message_v2.py
+
+      - name: Upload Screenshot on Failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: ./*.png
