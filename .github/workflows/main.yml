@@ -19,13 +19,13 @@ jobs:
           python-version: "3.11"
 
       # === 1. THÊM BƯỚC NÀY ĐỂ TỰ ĐỘNG CÀI CHROME TRÊN SERVER ===
-      - name: Install Google Chrome and Driver
+      - name: Install Google Chrome and Dependencies
         run: |
           sudo apt-get update
-          # Cài đặt phiên bản Chrome mới nhất
+          # Cài đặt Chrome
           sudo apt-get install -y google-chrome-stable
-          # Cài thêm thư viện để Chrome Headless chạy mượt trên Linux
-          sudo apt-get install -y libnss3 libnspr4 libgbm1 libasound2
+          # Cài các thư viện cần thiết với tên gói chính xác cho Ubuntu 24.04
+          sudo apt-get install -y libnss3 libnspr4 libgbm1 libasound2t64
 
       - name: Install dependencies
         run: |
