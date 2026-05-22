@@ -18,12 +18,15 @@ def get_driver():
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
     options.page_load_strategy = "eager"
+    options.add_argument("--lang=en-GB")
     
-    # Cấu hình để tự động nhận diện version Chrome
+    # THAY ĐỔI Ở ĐÂY:
+    # 1. version_main=148: Ép driver phải khớp với Chrome 148
+    # 2. use_subprocess=True: Giúp ổn định hơn trên server Linux
     driver = uc.Chrome(
-        options=options,
-        use_subprocess=True,
-        driver_executable_path=None # Để None để nó tự tải bản tương thích
+        options=options, 
+        version_main=148, 
+        use_subprocess=True
     )
     return driver
 def login():
