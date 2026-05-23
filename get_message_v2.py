@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Giữ nguyên các hàm cũ của công ty (để đảm bảo tính tương thích)
+
 from get_message import get_gsclient, SPREADSHEET_URL, save_screenshot, create_worksheet, get_messages, open_chat_by_search, get_all_groups, local_tz
 
 def get_driver():
@@ -20,7 +20,7 @@ def get_driver():
     options.page_load_strategy = "eager"
     options.add_argument("--lang=en-GB")
     
-    # THAY ĐỔI Ở ĐÂY:
+   
     # 1. version_main=148: Ép driver phải khớp với Chrome 148
     # 2. use_subprocess=True: Giúp ổn định hơn trên server Linux
     driver = uc.Chrome(
