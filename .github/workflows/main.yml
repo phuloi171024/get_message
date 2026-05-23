@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      # === 1. THÊM BƯỚC NÀY ĐỂ TỰ ĐỘNG CÀI CHROME TRÊN SERVER ===
+      # ĐỂ TỰ ĐỘNG CÀI CHROME TRÊN SERVER 
       - name: Install Google Chrome and Dependencies
         run: |
           sudo apt-get update
