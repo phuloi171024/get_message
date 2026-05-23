@@ -32,7 +32,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # === 2. CẤU HÌNH TỰ ĐỘNG TẠO FILE COOKIES VÀ CHẠY FILE V2 ===
+      
       - name: Run the main script
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
